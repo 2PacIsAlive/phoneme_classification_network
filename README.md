@@ -16,13 +16,13 @@ Upon startup, the program will ask you if you want to load weights.
 
 ##### Training
 * Minus Phase
-  * During the minus phase of each epoch of training, each input is presented once to the network. 
+  * During each epoch of training, each input is presented once to the network. 
   * After computing the activations of the hidden and output units, the network takes the maximally activated output unit as a "guess" about which phoneme was presented. 
   * Training stops when the network correctly identifies all phonemes in a 100 epoch cycle, or when the recursion depth is exceeded. 
   * After each 100 epoch cycle, the network will print the number of incorrect trials. If this number (the error) is greater than 0, the network will continue training. If the error is 0, the network will proceed to the testing phase.
 * Plus Phase
   * During the plus phase, the network computes an error value by subtracting the activation of the chosen unit from the expected value. 
-  * For each unit in the layer below, the unit's activation is multiplied by this error and the learning rate (currently 0.05), and this value is added to the previous weight value for the connection to compute the new weight value. As such, correct associations are always enforced and incorrect associations are always punished. 
+  * For each unit in the layer below, the unit's activation is multiplied by this error and the learning rate (currently 0.05), and this value is added to the previous weight value for the connection to compute the new weight. As such, correct associations are always enforced and incorrect associations are always punished. 
 
 ##### Testing
 * Testing occurs after the network finishes training, or directly following the loading of pre-trained weights. The program will print out the expected output and network output for each trial, and the phonemes themselves will be voiced through the speakers. 
