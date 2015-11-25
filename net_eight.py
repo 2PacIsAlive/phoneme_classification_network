@@ -30,7 +30,7 @@ class NeuralNetwork():
 	def makeNetwork(self):
 		for input_node in range(1000):
 			self.inputLayer.append(Neuron())
-		for hidden_node in range(8):
+		for hidden_node in range(16):
 			self.hiddenLayer.append(Neuron())
 		for output_node in range(8):
 			self.outputLayer.append(Neuron())	
