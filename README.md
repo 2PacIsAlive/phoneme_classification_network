@@ -1,5 +1,4 @@
 # Phoneme Classification Neural Network
-### Overview
 #### Running the Program:
 To run the program, simply type:
 ```
