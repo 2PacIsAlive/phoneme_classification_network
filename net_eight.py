@@ -28,7 +28,7 @@ class NeuralNetwork():
 		self.stateList = []
 
 	def makeNetwork(self):
-		for input_node in range(1000):
+		for input_node in range(10000):
 			self.inputLayer.append(Neuron())
 		for hidden_node in range(16):
 			self.hiddenLayer.append(Neuron())
@@ -46,7 +46,16 @@ class NeuralNetwork():
 			self.inputActivations.append((activation,file_[9:-4]))
 
 	def sigmoid(self,activation):
-		return 1 / (1 + math.exp(-activation))
+		try:
+			act = 1 / (1 + math.exp(-activation))
+		except OverflowError:
+			act = 0
+		if act < -1:
+			return -1
+		elif act > 1:
+			return 1
+		else:
+			return act	
 		
 	def hiddenActivationFunction(self,node,index):
 		f = 0
@@ -58,7 +67,7 @@ class NeuralNetwork():
 		f = 0
 		for hidden_node in self.hiddenLayer:
 			f += hidden_node.outputConnections[index][1] * float(hidden_node.act)
-		#print "output:", f, "sigmoid:", self.sigmoid(f)
+		#print "output:", f, "sigmoid:", self.sigmoid(f)	
 		return self.sigmoid(f)
 
 	def getPhoneme(self,node):
@@ -181,12 +190,20 @@ class NeuralNetwork():
 			hiddenCounter = 0
 			for hidden in self.hiddenLayer:
 				new_weight = (hidden.act * 0.05 * error) + output.hiddenConnections[hiddenCounter][1]
+				if new_weight < -1:
+					new_weight = -1
+				elif new_weight > 1:
+					new_weight = 1
 				#print output, correct, "old: ", output.hiddenConnections[hiddenCounter][1], "new: ",new_weight
 				output.hiddenConnections[hiddenCounter] = (hidden,new_weight)
 				hidden.outputConnections[outputCounter] = (output,new_weight)
 				inputCounter = 0
 				for input_ in self.inputLayer:
 					new_weight = (input_.act * 0.05 * error) + hidden.inputConnections[inputCounter][1]
+					if new_weight < -1:
+						new_weight = -1
+					elif new_weight > 1:
+						new_weight = 1
 					hidden.inputConnections[inputCounter] = (input_,new_weight)
 					input_.hiddenConnections[hiddenCounter] = (hidden,new_weight)
 					inputCounter += 1
@@ -229,14 +246,15 @@ class NeuralNetwork():
 
 	def train(self):
 		self.epochError = 0
-		for i in range(100):
+		for i in range(1):
 			self.trainingEpoch()
 			self.epochs += 1
 		print self.epochError
 		if self.epochError < 1:
 			return
-		else:
-			return self.train()
+		#if self.epochError > 6:
+		#	self.initializeRandomWeights()
+		return self.train()
 
 	def test(self):
 		trial = 0
@@ -289,7 +307,10 @@ def main():
 		net.initializeRandomWeights()
 		try:
 			#net.test()
-			net.train()
+			try: 
+				net.train()
+			except KeyboardInterrupt:
+				pass
 			print "Error across 100 epochs: ", net.epochError
 			print "Epochs to convergence:", net.epochs
 			#print net.stateList
