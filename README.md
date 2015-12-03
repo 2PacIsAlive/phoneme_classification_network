@@ -2,13 +2,13 @@
 #### Running the Program:
 To run the program, simply type:
 ```
-python net_six.py
+python network_fixed_backprop.py
 ```
 into your terminal or command prompt. Currently, the network only supports 6 inputs. These inputs are the /a/, /chi/, and /e/ japanese phonemes, each enunciated by a male and a female voice. 
 
 Upon startup, the program will ask you if you want to load weights.
 * Loading Weights (y):
-  * While the network usually converges on a solution, this process can take quite a long time. The amount of time required seems to depend entirely on the random weights generated, as the time taken to reach 0% error can take anywhere from 400 to 3000 epochs. As such, you can load (and save) pre-trained weights. Currently, the only weights file that the network structure supports is `six_phonemes.data`. Type this in when prompted to load the weights or open it in a text editor to see the values. 
+  * While the network usually converges on a solution, this process can take quite a long time. The amount of time required seems to depend entirely on the random weights generated, as the time taken to reach 0% error can take anywhere from 400 to 3000 epochs. As such, you can load (and save) pre-trained weights. Currently, the only weights file that the network structure supports is `weights_10.data`. Type this in when prompted to load the weights or open it in a text editor to see the values. 
 * Using Random Weights (n):
   * If weights are not loaded, the network will initialize random weights for all connections, and will attempt to train itself.
   * Choosing this option will activate a pre-test, in which the program will attempt to classify the input phonemes using the random weights. 
