@@ -4,7 +4,7 @@ To run the program, simply type:
 ```
 python network_fixed_backprop.py
 ```
-into your terminal or command prompt. Currently, the network only supports 6 inputs. These inputs are the /a/, /chi/, and /e/ japanese phonemes, each enunciated by a male and a female voice. 
+into your terminal or command prompt. Currently, the network only supports 10 inputs. These inputs are the a, chi, e, fu, and ha japanese phonemes, each enunciated by a male and a female voice. 
 
 Upon startup, the program will ask you if you want to load weights.
 * Loading Weights (y):
