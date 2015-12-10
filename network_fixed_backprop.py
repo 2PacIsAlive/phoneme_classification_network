@@ -29,20 +29,20 @@ class NeuralNetwork():
 	def makeNetwork(self):
 		for input_node in range(1000):
 			self.inputLayer.append(Neuron())
-		for hidden_node in range(12):
+		for hidden_node in range(36):
 			self.hiddenLayer.append(Neuron())
-		for output_node in range(8):
+		for output_node in range(34):
 			self.outputLayer.append(Neuron())	
 
 	def genInputActivations(self):
-		for file_ in glob.glob("wavelets/*"):	
+		for file_ in glob.glob("wavelets_medium/*"):	
 			phoneme = Image.open(file_)
 			pix = list(phoneme.getdata())
 			activation = []
 			for pixel in pix:
 				hexval = hex(pixel[0]) + hex(pixel[1])[:1] + hex(pixel[2])[:1]
 				activation.append((int(hexval,16))/100000.0)
-			self.inputActivations.append((activation,file_[9:-4]))
+			self.inputActivations.append((activation,file_[16:-4]))
 
 	def sigmoid(self,activation):
 		try:
@@ -51,10 +51,14 @@ class NeuralNetwork():
 			return 0 
 	
 	def hiddenActivationFunction(self,node,index):
-		f = 0
+		xw = 0
+		#zw = 0
 		for input_node in self.inputLayer:
-			f += input_node.hiddenConnections[index] * float(input_node.act) 
-		return self.sigmoid(f)
+			xw += input_node.hiddenConnections[index] * float(input_node.act) 
+		#for output_node in self.outputLayer:
+		#	zw += output_node.hiddenConnections[index] * float(input_node.act)
+		#return self.sigmoid(xw + zw)
+		return self.sigmoid(xw)
 
 	def outputActivationFunction(self,node,index):
 		f = 0
@@ -80,50 +84,231 @@ class NeuralNetwork():
 			return "fu_f"
 		elif node == self.outputLayer[7]:
 			return "fu_m"
-
+		elif node == self.outputLayer[8]:
+			return "ha_f"
+		elif node == self.outputLayer[9]:
+			return "ha_m"
+		elif node == self.outputLayer[10]:
+			return "he_f"
+		elif node == self.outputLayer[11]:
+			return "he_m"
+		elif node == self.outputLayer[12]:
+			return "hi_f"
+		elif node == self.outputLayer[13]:
+			return "hi_m"
+		elif node == self.outputLayer[14]:
+			return "ho_f"
+		elif node == self.outputLayer[15]:
+			return "ho_m"
+		elif node == self.outputLayer[16]:
+			return "i_f"
+		elif node == self.outputLayer[17]:
+			return "i_m"
+		elif node == self.outputLayer[18]:
+			return "ka_f"
+		elif node == self.outputLayer[19]:
+			return "ka_m"
+		elif node == self.outputLayer[20]:
+			return "ke_f"
+		elif node == self.outputLayer[21]:
+			return "ke_m"
+		elif node == self.outputLayer[22]:
+			return "ki_f"
+		elif node == self.outputLayer[23]:
+			return "ki_m"
+		elif node == self.outputLayer[24]:
+			return "ko_f"
+		elif node == self.outputLayer[25]:
+			return "ko_m"
+		elif node == self.outputLayer[26]:
+			return "ku_f"
+		elif node == self.outputLayer[27]:
+			return "ku_m"
+		elif node == self.outputLayer[28]:
+			return "ma_f"
+		elif node == self.outputLayer[29]:
+			return "ma_m"
+		elif node == self.outputLayer[30]:
+			return "me_f"
+		elif node == self.outputLayer[31]:
+			return "me_m"
+		elif node == self.outputLayer[32]:
+			return "mi_f"
+		elif node == self.outputLayer[33]:
+			return "mi_m"
+	
 	def getExpected(self,node,phoneme):
 		if phoneme[1] == "a_f":
 			if node == self.outputLayer[0]:
-				expected = 1
+				return 1
 			else:
-				expected = 0
+				return 0
 		elif phoneme[1] == "a_m":
 			if node == self.outputLayer[1]:
-				expected = 1
+				return 1
 			else:
-				expected = 0
+				return 0
 		elif phoneme[1] == "chi_f":
 			if node == self.outputLayer[2]:
-				expected = 1
+				return 1
 			else:
-				expected = 0
+				return 0
 		elif phoneme[1] == "chi_m":
 			if node == self.outputLayer[3]:
-				expected = 1
+				return 1
 			else:
-				expected = 0
+				return 0
 		elif phoneme[1] == "e_f":
 			if node == self.outputLayer[4]:
-				expected = 1
+				return 1
 			else:
-				expected = 0
+				return 0
 		elif phoneme[1] == "e_m":
 			if node == self.outputLayer[5]:
-				expected = 1
+				return 1
 			else:
-				expected = 0
+				return 0
 		elif phoneme[1] == "fu_f":
 			if node == self.outputLayer[6]:
-				expected = 1
+				return 1
 			else:
-				expected = 0
+				return 0
 		elif phoneme[1] == "fu_m":
 			if node == self.outputLayer[7]:
-				expected = 1
+				return 1
 			else:
-				expected = 0
-		return expected
-
+				return 0
+		elif phoneme[1] == "ha_f":
+			if node == self.outputLayer[8]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ha_m":
+			if node == self.outputLayer[9]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "he_f":
+			if node == self.outputLayer[10]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "he_m":
+			if node == self.outputLayer[11]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "hi_f":
+			if node == self.outputLayer[12]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "hi_m":
+			if node == self.outputLayer[13]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ho_f":
+			if node == self.outputLayer[14]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ho_m":
+			if node == self.outputLayer[15]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "i_f":
+			if node == self.outputLayer[16]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "i_m":
+			if node == self.outputLayer[17]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ka_f":
+			if node == self.outputLayer[18]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ka_m":
+			if node == self.outputLayer[19]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ke_f":
+			if node == self.outputLayer[20]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ke_m":
+			if node == self.outputLayer[21]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ki_f":
+			if node == self.outputLayer[22]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ki_m":
+			if node == self.outputLayer[23]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ko_f":
+			if node == self.outputLayer[24]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ko_m":
+			if node == self.outputLayer[25]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ku_f":
+			if node == self.outputLayer[26]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ku_m":
+			if node == self.outputLayer[27]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ma_f":
+			if node == self.outputLayer[28]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "ma_m":
+			if node == self.outputLayer[29]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "me_f":
+			if node == self.outputLayer[30]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "me_m":
+			if node == self.outputLayer[31]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "mi_f":
+			if node == self.outputLayer[32]:
+				return 1
+			else:
+				return 0
+		elif phoneme[1] == "mi_m":
+			if node == self.outputLayer[33]:
+				return 1
+			else:
+				return 0
+	
 	def trainingEpoch(self):
 		file_ = 0
 		for phoneme in self.inputActivations:
@@ -207,7 +392,8 @@ class NeuralNetwork():
 						tw += self.getExpected(output_backprop,phoneme) * weight 
 						zw += output_backprop.act * weight
 						backprop_counter += 1
-					new_weight = ((tw - zw) * hidden.act * input_.act) + hidden.inputConnections[inputCounter]
+					#new_weight = ((tw - zw) * hidden.act * input_.act) + hidden.inputConnections[inputCounter]
+					new_weight = ((tw - zw) * (hidden.act * (1 - hidden.act) * input_.act)) + hidden.inputConnections[inputCounter]
 					#print "EXPECTED:", self.getExpected(output,phoneme), "ACTUAL:", output.act, "OLD:", hidden.inputConnections[inputCounter], "NEW:", new_weight
 					#new_weight = (input_.act * 0.05 * error) + hidden.inputConnections[inputCounter][1]
 					hidden.inputConnections[inputCounter] = new_weight
@@ -260,10 +446,13 @@ class NeuralNetwork():
 
 	def train(self):
 		self.epochError = 0
-		for i in range(10):
-			self.trainingEpoch()
-			self.epochs += 1
-		print self.epochError
+		#for i in range(10):
+		#	self.trainingEpoch()
+		#	self.epochs += 1
+		self.trainingEpoch()
+		self.epochs += 1
+		print "Epoch:", self.epochs, "Error:", 100 * float(self.epochError)/float(len(self.outputLayer))
+		#print self.epochError
 		if self.epochError < 1:
 			return
 		else:
@@ -281,10 +470,11 @@ class NeuralNetwork():
 			#tts = gTTS(text=trial, lang = "en")
 			#tts.save(trial+".mp3")
 			#subprocess.call(["mpg321", "trial.mp3", "-quiet"], stderr=None, shell=False)
-			os.system("mpg321 trial.mp3 --quiet") 
-			os.system("mpg321 " + str(trial) + ".mp3 " + "--quiet")
-			os.system("mpg321 expected_output.mp3 --quiet")
-			os.system("mpg321 japanese_mp3s/" + phoneme + ".mp3 " + "--quiet")
+			if verbose:
+				os.system("mpg321 trial.mp3 --quiet") 
+				os.system("mpg321 " + str(trial) + ".mp3 " + "--quiet")
+				os.system("mpg321 expected_output.mp3 --quiet")
+				os.system("mpg321 japanese_mp3s/" + phoneme + ".mp3 " + "--quiet")
 			print "\nTrial: ", trial
 			print "Phoneme: ", phoneme[:-2]
 			print "Gender: ", phoneme[-1:]
@@ -294,12 +484,14 @@ class NeuralNetwork():
 				print "Correct!", "Output: ", phon
 			else:
 				print "Test failed.", "Output: ", phon
-			os.system("mpg321 output.mp3 --quiet")
-			os.system("mpg321 japanese_mp3s/" + phon + ".mp3 " + "--quiet")
+			if verbose:
+				os.system("mpg321 output.mp3 --quiet")
+				os.system("mpg321 japanese_mp3s/" + phon + ".mp3 " + "--quiet")
 			trial += 1
 
 	def saveWeights(self):
-		weights = open(raw_input("Enter file name: "),"w")
+		#weights = open(raw_input("Enter file name: "),"w")
+		weights = open("weights_10input_36hidden_34output.data","w")
 		for node in self.inputLayer:
 			for connection in node.hiddenConnections:
 				weights.write(str(connection))
@@ -310,26 +502,46 @@ class NeuralNetwork():
 				weights.write("\n")
 		weights.close()
 
+	def saveRFs(self):
+		rf_counter = 0
+		for hidden in self.hiddenLayer:
+			rf = open("hidden_unit_receptive_fields/"+rf_counter+".data","w")
+			for weight in hidden.inputConnections:
+				rf.write(str(weight))
+				rf.write("\n")
+			rf.close()
+			rf_counter += 1	
+
 def main():
 	#net = NeuralNetwork()
 	net.makeNetwork()
+	print "generating input activations...\n"
 	net.genInputActivations()
 	if raw_input("Would you like to load weights? (y/n) ") == "y":
+		print "loading weights...\n"
 		net.loadWeights()
 	else:
+		print "initializing random weights...\n"
 		net.initializeRandomWeights()
 		try:
 			#net.test()
+			print "beginning training...\n"
 			net.train()
+			print "Success!"
 			print "Error across 100 epochs: ", net.epochError
 			print "Epochs to convergence:", net.epochs
 			#print net.stateList
-		except RuntimeError:
-			print "Training Failed"
+		except:
+			print "training failed"
+	print "testing network...\n"
 	net.test()
-	if raw_input("Would you like to save the network's weights? (y/n) ") == "y":
-		net.saveWeights()	
+	#if raw_input("Would you like to save the network's weights? (y/n) ") == "y":
+	#	net.saveWeights()	
+	#net.saveWeights()
+	#print "weights saved\n"
+	net.saveRFs()
 
 if __name__=="__main__":
 	net = NeuralNetwork()
+	verbose = False
 	main()
