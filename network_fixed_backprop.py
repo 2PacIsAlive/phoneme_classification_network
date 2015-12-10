@@ -505,7 +505,7 @@ class NeuralNetwork():
 	def saveRFs(self):
 		rf_counter = 0
 		for hidden in self.hiddenLayer:
-			rf = open("hidden_unit_receptive_fields/"+rf_counter+".data","w")
+			rf = open("hidden_unit_receptive_fields/"+str(rf_counter)+".data","w")
 			for weight in hidden.inputConnections:
 				rf.write(str(weight))
 				rf.write("\n")
