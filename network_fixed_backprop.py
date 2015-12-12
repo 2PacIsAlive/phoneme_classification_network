@@ -1,4 +1,4 @@
-#!usr/bin/env python
+#usr/bin/env python
 
 from PIL import Image
 #from gtts import gTTS
@@ -504,9 +504,9 @@ class NeuralNetwork():
 
 	def saveRFs(self):
 		rf_counter = 0
-		for hidden in self.hiddenLayer:
-			rf = open("hidden_unit_receptive_fields/"+str(rf_counter)+".data","w")
-			for weight in hidden.inputConnections:
+		for output in self.outputLayer:
+			rf = open("output_unit_receptive_fields/"+str(rf_counter)+".data","w")
+			for weight in output.hiddenConnections:
 				rf.write(str(weight))
 				rf.write("\n")
 			rf.close()
