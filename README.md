@@ -1,14 +1,14 @@
 # Phoneme Classification Neural Network
 
 ## DISCLAIMER
-This repo is under construction! There have recently been several improvements to the code, and there are now pre-trained weights that allow the network to differentiate between 34 unique speech sounds. Those updates and a much cleaner file system will be here very soon!
+This repo is under construction! A cleaner file system will be here very soon!
 
 #### Running the Program:
 To run the program, simply type:
 ```
 python network_fixed_backprop.py
 ```
-into your terminal or command prompt. Currently, the network only supports 10 inputs. These inputs are the a, chi, e, fu, and ha japanese phonemes, each enunciated by a male and a female voice. 
+into your terminal or command prompt. Currently, the network only supports 34 inputs. These inputs are japanese mora (phonemes), each enunciated by a male and a female voice. 
 
 Upon startup, the program will ask you if you want to load weights.
 * Loading Weights (y):
